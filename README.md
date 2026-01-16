@@ -1,4 +1,4 @@
-# 💊🍔Food_safety-RAG-QA  
+# 💊Food_safety-RAG-QA  
 [2025 식품의약품안전처 협력 프로젝트]
 (기간 : 2025.01~2025.12)
 🧾 **RAG 기반 QA 시스템**
