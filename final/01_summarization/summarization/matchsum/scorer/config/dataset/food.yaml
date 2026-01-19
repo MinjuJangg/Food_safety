@@ -1,0 +1,6 @@
+name: food
+
+df:
+  val_ratio: 0.2
+  random_state: 42
+  shuffle: True

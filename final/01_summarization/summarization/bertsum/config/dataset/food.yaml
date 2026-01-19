@@ -1,0 +1,10 @@
+name: food
+
+path: /home/food/final/food/00_data/01_summarization/
+train_file: train_data.csv
+val_file: val_data.csv
+
+df:
+  val_ratio: 0.2
+  random_state: 42
+  shuffle: True

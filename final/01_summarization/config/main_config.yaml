@@ -1,0 +1,42 @@
+pipeline:
+  extraction: method1
+  summarization: bertsum
+  input_file: "/home/food/final/food/00_data/01_summarization/sample.html"
+
+extractors:
+  cetd:
+    clustering_threshold: 0.5
+  
+  neuscraper:
+    device: "auto"
+    threshold: 0.5
+    url_placeholder: "http://example.com"
+  
+  method1:
+    neu_threshold: 0.6
+    cetd_config: ${extractors.cetd}
+    neu_config: ${extractors.neuscraper}
+    
+  method2:
+    neu_threshold: 0.5
+    cetd_config: ${extractors.cetd}
+    neu_config: ${extractors.neuscraper}
+
+summarizers:
+  bertsum:
+    config_name: "bertsum_inference.yaml"
+    config_path: "./config/"
+  
+  matchsum:
+    checkpoint_path: "/home/food/final/food/01_summarization/summarization/matchsum/checkpoint/MatchSum_cnndm_bert.ckpt"
+    bert_model_name: "bert-base-uncased"
+    device: "cuda"
+    ext_param: 12
+    sel_param: 10
+
+    scorer_config:
+      config_name: "bertext_config.yaml"
+      config_path: "./config/"
+
+  exaone:
+    api_key: ""
