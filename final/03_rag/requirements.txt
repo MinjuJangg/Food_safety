@@ -1,0 +1,9 @@
+python==3.10.18
+torch==2.7.1+cu118
+transformers==4.52.4
+sentence-transformers==4.1.0
+faiss-cpu==1.11.0
+pandas==1.5.3
+numpy==2.3.4
+accelerate==0.25.0
+bitsandbytes==0.41.3
