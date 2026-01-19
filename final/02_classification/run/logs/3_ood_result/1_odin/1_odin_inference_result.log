@@ -1,0 +1,22 @@
+Some weights of XLMRobertaForSequenceClassification were not initialized from the model checkpoint at xlm-roberta-base and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+[load ckpt] missing=0, unexpected=0
+
+== Summary ==
+Baseline (δ from ID_VAL) | VAL: AUROC=0.7888, FPR@TPR95=83.72%, Thr95=0.532861
+                         | TEST: AUROC=0.8101, FPR@TPR95=85.42%
+
+Top-5 ODIN settings (sorted by VAL FPR@TPR95, tie→VAL AUROC desc):
+  T=100, eps=0.0005 | VAL: AUROC=0.8054, FPR@TPR95=84.88%, Thr95=0.147217 | TEST: AUROC=0.8220, FPR@TPR95=83.09%
+  T=1000, eps=0.0005 | VAL: AUROC=0.7974, FPR@TPR95=86.05%, Thr95=0.143311 | TEST: AUROC=0.8104, FPR@TPR95=84.55%
+  T=100, eps=0.0015 | VAL: AUROC=0.8031, FPR@TPR95=87.21%, Thr95=0.147827 | TEST: AUROC=0.8266, FPR@TPR95=81.63%
+  T=500, eps=0.0015 | VAL: AUROC=0.7935, FPR@TPR95=88.37%, Thr95=0.143799 | TEST: AUROC=0.8198, FPR@TPR95=83.67%
+  T=500, eps=0.0005 | VAL: AUROC=0.8052, FPR@TPR95=89.53%, Thr95=0.143677 | TEST: AUROC=0.8150, FPR@TPR95=88.05%
+
+== Best by VAL FPR@TPR95 (applied to TEST) ==
+T=100, eps=0.0005 | Thr95=0.147217 | TEST: AUROC=0.8220, FPR@TPR95=83.09%
+
+Full grid saved to: /home/blackbeat/yoonjung/1_odin/result_1014/result_odin.csv
+Misdetections saved under: /home/blackbeat/yoonjung/1_odin/result_1014/mistakes/ (mispredict_ood_to_id_T100_eps0.0005.csv, mispredict_id_to_ood_T100_eps0.0005.csv)
+
+[Time] Total elapsed: 648.77 sec

@@ -1,0 +1,7 @@
+{
+  "best_metric_key": "ood_csv_ood_data_maha_fpr95",
+  "best_fpr95": 0.6727688787185355,
+  "best_auroc": 0.862921709722184,
+  "best_thr95": -9827.423779296874,
+  "test_accuracy": 0.9108433734939759
+}

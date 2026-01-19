@@ -1,0 +1,2 @@
+ood_food_cosine_auroc,ood_food_cosine_tpr95_thr,ood_food_cosine_tpr95,ood_food_cosine_fpr95,ood_food_maha_auroc,ood_food_maha_tpr95_thr,ood_food_maha_tpr95,ood_food_maha_fpr95,id_accuracy,ood_food_best_method,ood_food_best_fpr95,ood_food_best_auroc,ood_food_best_tpr95_thr,ood_food_best_tpr95
+88.739,0.980172,95.020,59.714,87.315,-1004.013306,95.020,66.286,88.956,cosine,59.714,88.739,0.980172,95.020

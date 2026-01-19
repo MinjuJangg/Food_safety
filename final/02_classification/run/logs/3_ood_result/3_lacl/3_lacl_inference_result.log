@@ -1,0 +1,9 @@
+Some weights of LACL were not initialized from the model checkpoint at xlm-roberta-base and are newly initialized: ['global_projector.0.bias', 'global_projector.0.weight', 'global_projector.3.bias', 'global_projector.3.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+[load ckpt] missing=0, unexpected=0
+[utils] Loading task=food from /SSL_NAS/peoples/yoonjung/data/id_ood_data
+[utils] #train=19942 | #ind_test=2490 | #ood_eval=350
+[utils] train labels(unique)=7 | ind_test labels(unique)=7
+[BEST] ood_food_cosine | FPR@TPR95=0.5971, AUROC=0.8874, thr=0.980172
+{'ood_food_cosine_auroc': 0.8873907056798622, 'ood_food_cosine_tpr95_thr': 0.9801721572875977, 'ood_food_cosine_tpr95': 0.9502008032128514, 'ood_food_cosine_fpr95': 0.5971428571428572, 'ood_food_maha_auroc': 0.8731451520367183, 'ood_food_maha_tpr95_thr': -1004.0133056640625, 'ood_food_maha_tpr95': 0.9502008032128514, 'ood_food_maha_fpr95': 0.6628571428571428, 'id_accuracy': 0.8895582329317269, 'ood_food_best_method': 'cosine', 'ood_food_best_fpr95': 0.5971428571428572, 'ood_food_best_auroc': 0.8873907056798622, 'ood_food_best_tpr95_thr': 0.9801721572875977, 'ood_food_best_tpr95': 0.9502008032128514}
+[총 실행 시간] 5.15 분 (308.7 초)

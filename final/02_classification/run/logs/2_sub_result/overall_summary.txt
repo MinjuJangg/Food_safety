@@ -1,0 +1,2 @@
+ class   precision(macro)  recall(macro)   f1(macro)   precision(weighted)   recall(weighted)    f1(weighted)  accuracy  support
+ 전체                 0.553          0.587       0.547                 0.768              0.767           0.753     0.767     1500
