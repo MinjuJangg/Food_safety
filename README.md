@@ -16,49 +16,105 @@ Crawling → Retrieval → Re-ranking → QA Generation (End-to-End)
 현업 담당자가 **신속하고 정확하게 질의응답을 수행할 수 있도록 지원하는 RAG(Retrieval-Augmented Generation) 기반 QA 시스템**을 구축하는 것을 목표
 
 
-##  프로젝트 개요  
-
-본 프로젝트는 식약처 공개 문서를 수집 및 정제하고
+=>  식약처 공개 문서를 수집 및 정제하고
 **하이브리드 검색(BM25 + Dense Embedding) + 한국어 리랭커 + LLM 응답기**를 결합하여 실제 현업에서 문서 검토를 지원할 수 있는 QA 시스템을 구현하는 것을 목표
 
 
+## Motivation
 
-##  전체 프로세스  
+### 식품 안전 문서 환경의 한계
+
+- 법령, 고시, 가이드라인 등 **문서 수량 과다**
+- PDF, HTML, 표, 이미지 등 **비정형 데이터 혼재**
+- 특정 질의에 대해 **수작업 문서 검토 필요**
+
+### 문제 인식
+
+- 단순 키워드 검색은 문맥 기반 질의에 취약
+- 유사 문서 다수로 인해 **정확한 근거 파악 어려움**
+- 현업에서 바로 활용 가능한 **QA 형태의 응답 필요**
+
+
+
+## Proposed Pipeline
 ![alt text](image.png)
 
 ```
-
-1. **크롤링**: Playwright 기반 비동기 크롤러로 3만 건 이상의 웹 문서 수집  
-2. **정제**: CETD(Content Extraction via Tag Density) 기법으로 본문 추출 및 표/이미지 후처리  
-3. **인덱싱**: BM25(키워드) + LaBSE(의미 임베딩) 기반 **하이브리드 검색기** 구축  
-4. **리랭킹**: Ko-Reranker로 상위 검색 결과 정밀 재정렬  
-5. **QA 데이터 구축**: GPT 기반 QA 쌍 생성 및 Gemini 교차 검증  
-6. **응답 생성**: Exaone/GPT API 기반 LLM으로 최종 답변 생성, 출처 인용 포함  
-
-=> 이를 통해 단순 키워드 검색 대비 **검색 정확도와 QA 품질을 크게 향상**
-
+Web Documents
+↓
+Asynchronous Crawling (Playwright)
+↓
+Content Extraction & Cleaning (CETD)
+↓
+Hybrid Retrieval (BM25 + LaBSE)
+↓
+Korean Re-ranking (Ko-Reranker)
+↓
+QA Pair Generation (GPT + Gemini)
+↓
+Answer Generation (Exaone / GPT)
 ```
 
+## System Architecture
 
-##  주요 기능  
+### Input
+- 사용자 자연어 질의 (한국어)
 
-- **하이브리드 검색기**: BM25 + LaBSE 결합, 가중치 조정 가능  
-- **리랭커**: 한국어 Ko-Reranker 적용으로 검색 결과 정밀 재정렬  
-- **QA 쌍 생성**: GPT 기반 데이터 생성 + Gemini 교차 검증 파이프라인  
-- **LLM 응답 생성**: Exaone/GPT API 기반 답변 생성 
+### Output
+- 질의에 대한 자연어 답변
+- 근거 문서 출처 포함
 
+## Data Collection
 
-##  특징  
+- **Crawling Method**
+  - Playwright 기반 비동기 크롤러
+- **Source**
+  - 식약처 제공 웹페이지 및 포털
+- **Scale**
+  - 약 30,000건 이상의 문서 수집
 
-- **온프레미스 실행 가능**: 내부 DB + 검색기만으로 동작  
-- **End-to-End 자동화**: 크롤링 → 정제 → 검색 → QA 생성까지 일괄 수행  
-- **다양한 문서 지원**: 표, 이미지 캡션, PDF 등 비정형 문서 처리  
+## Preprocessing
 
-##  프로젝트 의의  
+- **CETD (Content Extraction via Tag Density)**
+  - HTML 기반 본문 추출
+- 표 / 이미지 캡션 후처리
+- 불필요한 네비게이션·광고 영역 제거
 
-- **보안성**: 내부망에서도 안전하게 활용 가능 (데이터 외부 전송 없음)  
-- **효율성**: 검색 품질 23%p ↑, F1 34% ↑  
-- **실용성**: 비정형 문서를 실제 업무 활용 가능한 지식으로 전환  
+---
+
+## Retrieval Module
+
+### Hybrid Search
+
+- **BM25**
+  - 키워드 기반 검색
+- **LaBSE**
+  - 의미 기반 Dense Embedding
+- 두 결과를 결합한 하이브리드 검색 구조
+- 가중치 조정 가능
+
+## Re-ranking
+
+- **Ko-Reranker 적용**
+- 상위 검색 결과에 대해
+  - 문맥 기반 정밀 재정렬 수행
+- 한국어 질의–문서 정합성 개선
+
+## Answer Generation
+
+- **LLM**
+  - Exaone / GPT API
+- Retrieval 결과를 context로 활용한
+  **근거 기반 답변 생성**
+- 모든 응답에 **출처 문서 인용 포함**
+
+## System Characteristics
+
+- End-to-End 자동화 파이프라인
+- 하이브리드 검색 + 리랭킹 구조
+- 한국어 특화 QA 시스템
+- 온프레미스 환경 실행 가능
+- 내부망 환경에서도 활용 가능
 
 
 ##  담당 역할  
